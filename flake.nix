@@ -199,7 +199,7 @@
       version = "3.23.2";
       dontUnpack = true;
 
-      nativeBuildInputs = with bPkgs; [ apk-tools ];
+      nativeBuildInputs = with bPkgs; [ apk-tools cacert ];
 
       # Fixed-output derivation — needs network for apk
       outputHashMode = "recursive";
@@ -209,10 +209,13 @@
       buildPhase = ''
         mkdir -p $out
 
+        # CA cert bundle for TLS
+        export SSL_CERT_FILE="${bPkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+
         # Build Alpine rootfs for aarch64
         apk --arch aarch64 --root $out --initdb --usermode add \
-          --repository http://dl-cdn.alpinelinux.org/alpine/v3.23/main \
-          --repository http://dl-cdn.alpinelinux.org/alpine/v3.23/community \
+          --repository https://dl-cdn.alpinelinux.org/alpine/v3.23/main \
+          --repository https://dl-cdn.alpinelinux.org/alpine/v3.23/community \
           $(cat ${./rootfs/etc/apk/world})
       '';
 
