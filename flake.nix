@@ -46,6 +46,9 @@
       '';
 
       buildPhase = ''
+        export C_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        export CPLUS_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        export LIBRARY_PATH="${bPkgs.openssl.out}/lib"
         make ARCH=arm64 CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} \
           -j$NIX_BUILD_CORES Image modules dtbs
       '';
@@ -158,7 +161,7 @@
         # e2fsprogs — for partition expansion (e2fsck, resize2fs)
         cp ${crossPkgs.e2fsprogs}/sbin/e2fsck stage/sbin/
         cp ${crossPkgs.e2fsprogs}/sbin/resize2fs stage/sbin/
-        cp ${crossPkgs.utillinux}/sbin/fdisk stage/sbin/
+        cp ${crossPkgs.util-linux}/sbin/fdisk stage/sbin/
 
         # Init script
         cp ${./initramfs/init} stage/init
@@ -196,7 +199,7 @@
       version = "3.23.2";
       dontUnpack = true;
 
-      nativeBuildInputs = with bPkgs; [ apkTools ];
+      nativeBuildInputs = with bPkgs; [ apk-tools ];
 
       # Fixed-output derivation — needs network for apk
       outputHashMode = "recursive";
@@ -236,7 +239,7 @@
       dontUnpack = true;
 
       nativeBuildInputs = with pkgs; [
-        dosfstools e2fsprogs mtools parted sfdisk utillinux gzip
+        dosfstools e2fsprogs mtools parted util-linux gzip
       ];
 
       installPhase = ''
