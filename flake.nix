@@ -198,6 +198,7 @@
       pname = "alpine-rootfs";
       version = "3.23.2";
       dontUnpack = true;
+      dontCheckForBrokenSymlinks = true;
 
       nativeBuildInputs = with bPkgs; [ apk-tools cacert openssl.bin ];
 
