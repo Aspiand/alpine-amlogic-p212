@@ -205,7 +205,7 @@
       # Fixed-output derivation — needs network for apk
       outputHashMode = "recursive";
       outputHashAlgo = "sha256";
-      outputHash = "sha256-XT5m/cSuYJzIIUYRbelnek8gybtliLWWn1A8Occ0y7Y=";
+      outputHash = "sha256-EV1mDG/NoP3AW4+/DnerTI4PkxApOBGj9S4fNTPX+F4=";
 
       buildPhase = ''
         mkdir -p $out
