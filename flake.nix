@@ -85,7 +85,7 @@
       };
 
       nativeBuildInputs = with bPkgs; [
-        stdenv.cc bc bison flex dtc python3 openssl swig python3Packages.setuptools
+        stdenv.cc bc bison flex dtc python3 openssl.dev swig python3Packages.setuptools
       ];
 
       configurePhase = ''
