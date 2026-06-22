@@ -85,19 +85,22 @@
       };
 
       nativeBuildInputs = with bPkgs; [
-        stdenv.cc bc bison flex dtc python3 openssl.dev swig python3Packages.setuptools
+        stdenv.cc bc bison flex dtc python3 openssl.out openssl.dev
+        swig python3Packages.setuptools
       ];
 
       configurePhase = ''
         cp ${./bootloader/u-boot/.config} .config
         export C_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
         export CPLUS_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        export LIBRARY_PATH="${bPkgs.openssl.out}/lib"
         make ARCH=arm CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} olddefconfig
       '';
 
       buildPhase = ''
         export C_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
         export CPLUS_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        export LIBRARY_PATH="${bPkgs.openssl.out}/lib"
         make ARCH=arm CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} \
           -j$NIX_BUILD_CORES
       '';
