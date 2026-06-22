@@ -90,13 +90,16 @@
 
       configurePhase = ''
         cp ${./bootloader/u-boot/.config} .config
-        make ARCH=arm CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} \
-          HOSTCFLAGS=-I${bPkgs.openssl.dev}/include olddefconfig
+        export C_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        export CPLUS_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        make ARCH=arm CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} olddefconfig
       '';
 
       buildPhase = ''
+        export C_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
+        export CPLUS_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
         make ARCH=arm CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} \
-          HOSTCFLAGS=-I${bPkgs.openssl.dev}/include -j$NIX_BUILD_CORES
+          -j$NIX_BUILD_CORES
       '';
 
       installPhase = ''
