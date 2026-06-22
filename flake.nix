@@ -214,7 +214,7 @@
 
         # Build Alpine rootfs for aarch64
         apk --arch aarch64 --root $out --initdb --usermode add \
-          --allow-untrusted \
+          --allow-untrusted --no-scripts \
           --repository https://dl-cdn.alpinelinux.org/alpine/v3.23/main \
           --repository https://dl-cdn.alpinelinux.org/alpine/v3.23/community \
           $(cat ${./rootfs/etc/apk/world})
