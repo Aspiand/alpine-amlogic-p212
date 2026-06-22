@@ -29,18 +29,18 @@
 
       src = bPkgs.fetchurl {
         url = "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.18.35.tar.xz";
-        hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        hash = "sha256-94YCkyIZEl4hHF9b/YTtz9TsXOiPyUT4JIQT9mW+8jY=";
       };
 
       nativeBuildInputs = with bPkgs; [
-        bc bison flex dtc openssl perl python3 kmod elfutils gawk
+        gcc bc bison flex dtc openssl perl python3 kmod elfutils gawk
       ];
 
       configurePhase = ''
         cp ${bPkgs.fetchurl {
           name = "linux-meson64-current.config";
           url = "https://raw.githubusercontent.com/armbian/build/main/config/kernel/linux-meson64-current.config";
-          hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+          hash = "sha256-OTIofurbfpQGh2ppsiApH/qh2ZUXhN4Ew8KM12TEj2s=";
         }} .config
         make ARCH=arm64 CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} olddefconfig
       '';
