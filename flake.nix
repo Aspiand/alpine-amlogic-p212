@@ -199,7 +199,7 @@
       version = "3.23.2";
       dontUnpack = true;
 
-      nativeBuildInputs = with bPkgs; [ apk-tools cacert ];
+      nativeBuildInputs = with bPkgs; [ apk-tools cacert openssl.bin ];
 
       # Fixed-output derivation — needs network for apk
       outputHashMode = "recursive";
