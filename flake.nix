@@ -210,7 +210,7 @@
         mkdir -p $out
 
         # Build Alpine rootfs for aarch64
-        apk --arch aarch64 --root $out --initdb add \
+        apk --arch aarch64 --root $out --initdb --usermode add \
           --repository https://dl-cdn.alpinelinux.org/alpine/v3.23/main \
           --repository https://dl-cdn.alpinelinux.org/alpine/v3.23/community \
           $(cat ${./rootfs/etc/apk/world})
