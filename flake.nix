@@ -86,7 +86,7 @@
 
       nativeBuildInputs = with bPkgs; [
         stdenv.cc bc bison flex dtc python3 openssl.out openssl.dev
-        swig python3Packages.setuptools
+        gnutls swig python3Packages.setuptools
       ];
 
       configurePhase = ''
@@ -98,9 +98,9 @@
       '';
 
       buildPhase = ''
-        export C_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
-        export CPLUS_INCLUDE_PATH="${bPkgs.openssl.dev}/include"
-        export LIBRARY_PATH="${bPkgs.openssl.out}/lib"
+        export C_INCLUDE_PATH="${bPkgs.gnutls.dev}/include:${bPkgs.openssl.dev}/include"
+        export CPLUS_INCLUDE_PATH="${bPkgs.gnutls.dev}/include:${bPkgs.openssl.dev}/include"
+        export LIBRARY_PATH="${bPkgs.openssl.out}/lib:${bPkgs.gnutls.out}/lib"
         make ARCH=arm CROSS_COMPILE=${crossPkgs.stdenv.cc.targetPrefix} \
           -j$NIX_BUILD_CORES
       '';
