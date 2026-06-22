@@ -33,7 +33,7 @@
       };
 
       nativeBuildInputs = with bPkgs; [
-        gcc bc bison flex dtc openssl perl python3 kmod elfutils gawk
+        stdenv.cc bc bison flex dtc openssl perl python3 kmod elfutils gawk
       ];
 
       configurePhase = ''
@@ -81,12 +81,11 @@
 
       src = bPkgs.fetchurl {
         url = "https://ftp.denx.de/pub/u-boot/u-boot-2026.01.tar.bz2";
-        hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+        hash = "sha256-tg1YZc79vHXajaQVbFbEWOAN51pJuAwaLlipbjCtDVQ=";
       };
 
       nativeBuildInputs = with bPkgs; [
-        bc bison flex dtc python3 openssl swig
-        python3Packages.setuptools
+        stdenv.cc bc bison flex dtc python3 openssl swig python3Packages.setuptools
       ];
 
       configurePhase = ''
